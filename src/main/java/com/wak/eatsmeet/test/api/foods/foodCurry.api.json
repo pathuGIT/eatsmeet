@@ -1,0 +1,20 @@
+[
+  {
+    "name": "Add Curry to Food",
+    "method": "POST",
+    "url": "/api/food/1/add-curry/2",
+    "role": "ADMIN/SUPER_ADMIN"
+  },
+  {
+    "name": "Remove Curry from Food",
+    "method": "DELETE",
+    "url": "/api/food/1/remove-curry/2",
+    "role": "ADMIN/SUPER_ADMIN"
+  },
+  {
+    "name": "Get All Curries for a Food",
+    "method": "GET",
+    "url": "/api/food/1/curries",
+    "role": "USER/ADMIN/SUPER_ADMIN"
+  }
+]
