@@ -1,0 +1,85 @@
+[
+  {
+    "name": "Add a New Employee to the System by Admin",
+    "method": "POST",
+    "url": "/api/emp/register",
+    "headers": {
+      "Authorization": "Bearer <SUPER_ADMIN_JWT_TOKEN>"
+    },
+    "role": "ADMIN",
+    "body": {
+      "name": "Saman Kumara",
+      "email": "samnku@gmail.com",
+      "contact": "0741231231",
+      "address": "No.32, Beragama",
+      "bod": "2001-02-09",
+      "password": "@qweZX"
+    }
+  },
+  {
+    "name": "Get All Employees",
+    "method": "GET",
+    "url": "/api/emp",
+    "headers": {
+      "Authorization": "Bearer <SUPER_ADMIN_JWT_TOKEN>"
+    },
+    "role": "ADMIN"
+  },
+  {
+    "name": "Get Employees by Name",
+    "method": "GET",
+    "url": "/api/emp?name=kamal",
+    "headers": {
+      "Authorization": "Bearer <SUPER_ADMIN_JWT_TOKEN>"
+    },
+    "role": "ADMIN"
+  },
+  {
+    "name": "Get Employee by ID",
+    "method": "GET",
+    "url": "/api/emp?id=2",
+    "headers": {
+      "Authorization": "Bearer <SUPER_ADMIN_JWT_TOKEN>"
+    },
+    "role": "ADMIN"
+  },
+  {
+    "name": "Delete a Employee by Admin",
+    "method": "DELETE",
+    "url": "/api/emp?id=2",
+    "headers": {
+      "Authorization": "Bearer <SUPER_ADMIN_JWT_TOKEN>"
+    },
+    "role": "ADMIN"
+  },
+  {
+    "name": "Update a Employee by Admin",
+    "method": "PUT",
+    "url": "/api/emp?id=2",
+    "headers": {
+      "Authorization": "Bearer <SUPER_ADMIN_JWT_TOKEN>"
+    },
+    "role": "ADMIN",
+    "body": {
+      "name": "Saman Kumara",
+      "email": "samnku@gmail.com",
+      "contact": "0741231231",
+      "address": "No.32, Beragama",
+      "bod": "2001-02-09",
+      "password": "@qweZX"
+    }
+  },
+  {
+    "name": "Change a Employee ROLE",
+    "method": "PUT",
+    "url": "/api/emp?id=2",
+    "headers": {
+      "Authorization": "Bearer <SUPER_ADMIN_JWT_TOKEN>"
+    },
+    "role": "ADMIN",
+    "body": {
+      "role": "SUB ADMIN",
+      "password": "ZxbG@87"
+    }
+  }
+]
