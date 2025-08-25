@@ -1,0 +1,17 @@
+[
+  {
+    "name": "Send SUB_ADMIN Credentials to the Employee Mail",
+    "method": "PUT",
+    "url": "/api/mail/emp?id=2",
+    "headers": {
+      "Authorization": "Bearer <SUPER_ADMIN_JWT_TOKEN>"
+    },
+    "role": "ADMIN",
+    "body": {
+      "role": "SUB ADMIN",
+      "email": "exmpl@gmail.com",
+      "contact": "0741231231",
+      "password": "ZxbG@87"
+    }
+  }
+]
