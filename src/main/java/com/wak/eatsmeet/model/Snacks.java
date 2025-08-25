@@ -11,24 +11,20 @@ import java.util.Date;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@Setter
 @Getter
-public class Employees {
+@Setter
+public class Snacks {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "emp_id")
+    @Column(name = "snack_id")
     private int id;
     private String name;
-    private String email;
-    private String contact;
-    private String address;
-    private Date bod;
-
-    @Enumerated(EnumType.STRING)
-    private Roles roles;
-
-    private Boolean active;
-    private String password;
-    private String refresh_token;
+    private double stock;
+    private double price;
+    private boolean scale;
+    private String description;
+    private Date mnf_date;
+    private Date exp_date;
+    private String brand;
     private String img_url;
 }

@@ -6,29 +6,24 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@Setter
 @Getter
-public class Employees {
+@Setter
+public class Curry {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "emp_id")
+    @Column(name = "curry_id")
     private int id;
     private String name;
-    private String email;
-    private String contact;
-    private String address;
-    private Date bod;
-
-    @Enumerated(EnumType.STRING)
-    private Roles roles;
-
-    private Boolean active;
-    private String password;
-    private String refresh_token;
+    private double price;
+    private String details;
     private String img_url;
+
+    @OneToMany(mappedBy = "curry", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<FoodsCurry> foodsCurries = new HashSet<>();
 }
