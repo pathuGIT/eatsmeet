@@ -23,8 +23,14 @@ public class AuthController {
     @Autowired
     private AuthService authService;
 
+    @GetMapping("/")
+    public String hello(){
+        return "Hello";
+    }
+
     @PostMapping("/register")
     public ResponseEntity<?> userRegister(@Valid @RequestBody Users users, BindingResult result){
+        System.out.println("test1");
         if (result.hasErrors()) {
             // Collect error messages
             List<String> errors = result.getAllErrors()
@@ -41,12 +47,16 @@ public class AuthController {
             users.setImg_url(null);
 
             UserRegisterResponse res = authService.userRegister(users);
-            return ResponseEntity.ok(new ApiResponse<>("User registered successfully!", res));
+            ApiResponse<UserRegisterResponse> response = new ApiResponse<>();
+            response.setMessage("User registered successfully!");
+            response.setData(res);
+            return ResponseEntity.ok(response);
+
 
         } catch (IllegalArgumentException ex){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ApiResponse<>(ex.getMessage(), null));
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ApiResponse<String>(ex.getMessage(), null));
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ApiResponse<>("An unexpected error occurred", null));
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ApiResponse<String>("An unexpected error occurred", null));
         }
     }
 }

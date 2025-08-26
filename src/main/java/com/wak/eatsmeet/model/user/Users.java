@@ -43,6 +43,7 @@ public class Users {
     @NotBlank(message = "Password is required")
     @Size(min = 6, message = "Password must be at least 6 characters")
     private String password;
+
     private Boolean active;
     private String refresh_token;
     private String img_url;
@@ -52,4 +53,5 @@ public class Users {
 
     @OneToMany(mappedBy = "users", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Orders> orders;
+
 }

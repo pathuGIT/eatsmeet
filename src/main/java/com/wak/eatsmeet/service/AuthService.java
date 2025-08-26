@@ -18,14 +18,17 @@ public class AuthService {
         if(userRepo.existsByEmail(users.getEmail())){
             throw new IllegalArgumentException("This Email already exists.");
         }
-        if(userRepo.existsByContact()){
+        if(userRepo.existsByContact(users.getContact())){
             throw new IllegalArgumentException("This Email already exists.");
         }
-        if(userRepo.existsByNic()){
+        if(userRepo.existsByNic(users.getNic())){
             throw new IllegalArgumentException("This NIC number already exists.");
         }
         users.setPassword(bCryptPasswordEncoder.encode(users.getPassword()));
+        //return userRepo.save(users);
+
         Users res = userRepo.save(users);
-        return new UserRegisterResponse(res.getId(), res.getName(), res.getEmail(), res.getContact());
+        UserRegisterResponse ur = new UserRegisterResponse(res.getId(), res.getName(), res.getEmail(), res.getContact());
+        return ur;
     }
 }
