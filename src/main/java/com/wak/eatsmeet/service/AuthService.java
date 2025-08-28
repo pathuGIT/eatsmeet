@@ -9,9 +9,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.Map;
 
 @Service
 public class AuthService {
@@ -66,5 +69,23 @@ public class AuthService {
 
         System.out.println("test5");
         return new TokenResponse(activeToken, refreshToken);
+    }
+
+    public Map<String, String> getRefreshToken(String refreshToken) {
+        try {
+            String userLogin = jwtService.extractUserName(refreshToken);
+            String role = jwtService.extractRole(refreshToken);
+
+            System.out.println("t1"+ userLogin + role);
+            UserDetails userDetails = User.withUsername(userLogin).password("").roles(role).build();
+            if(jwtService.validateToken(refreshToken, userDetails)){
+                System.out.println("t2");
+                String newActiveToken = jwtService.generateActiveToken(userLogin, role);
+                return Map.of("activeToken", newActiveToken);
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        throw new RuntimeException("Error generate refresh token.");
     }
 }

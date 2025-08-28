@@ -18,6 +18,7 @@ import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -70,11 +71,23 @@ public class AuthController {
             return ResponseEntity.ok(new ApiResponse<TokenResponse>("User Login Successfull.", response ));
         } catch (IllegalArgumentException ex) {
             // Bad request: invalid username/password or user not found
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ApiResponse<String>("Error Login", ex.getMessage()));
         } catch (Exception ex) {
             // Internal server error for unexpected cases
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An unexpected error occurred");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ApiResponse<String>("An unexpected error occurred", null));
         }
     }
 
+    @PostMapping("/refresh-token")
+    public ResponseEntity<?> refresh(@RequestBody Map<String, String> request){
+        try {
+            String refreshToken = request.get("refreshToken");
+            System.out.println(refreshToken);
+            Map<String, String> res =  authService.getRefreshToken(refreshToken);
+            System.out.println(res);
+            return ResponseEntity.ok(new ApiResponse<Map<String, String>>("success", res));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ApiResponse<String>("failed", e.getMessage()));
+        }
+    }
 }
