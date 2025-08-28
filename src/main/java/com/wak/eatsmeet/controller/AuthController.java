@@ -1,6 +1,8 @@
 package com.wak.eatsmeet.controller;
 
 import com.wak.eatsmeet.dto.ApiResponse;
+import com.wak.eatsmeet.dto.LoginRequest;
+import com.wak.eatsmeet.dto.TokenResponse;
 import com.wak.eatsmeet.dto.UserRegisterResponse;
 import com.wak.eatsmeet.model.user.UserRole;
 import com.wak.eatsmeet.model.user.Users;
@@ -61,5 +63,18 @@ public class AuthController {
         }
     }
 
+    @PostMapping("/login")
+    public ResponseEntity<?> login(@Valid @RequestBody LoginRequest loginRequest){
+        try {
+            TokenResponse response = authService.verifyUser(loginRequest);
+            return ResponseEntity.ok(new ApiResponse<TokenResponse>("User Login Successfull.", response ));
+        } catch (IllegalArgumentException ex) {
+            // Bad request: invalid username/password or user not found
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
+        } catch (Exception ex) {
+            // Internal server error for unexpected cases
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An unexpected error occurred");
+        }
+    }
 
 }

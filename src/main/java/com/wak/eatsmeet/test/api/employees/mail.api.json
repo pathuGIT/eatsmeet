@@ -17,9 +17,9 @@
   {
     "name": "Send user validate link to the user",
     "method": "PUT",
-    "url": "/api/mail/validate/user?email=2",
+    "url": "api/mail/validate-link?email=pathumwannige@gmail.com",
     "headers": {
-      "Authorization": "Bearer <SUPER_ADMIN_JWT_TOKEN>"
+      "Authorization": null
     },
     "role": "ADMIN",
     "body": {
