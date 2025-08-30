@@ -3,7 +3,9 @@ package com.wak.eatsmeet.service;
 import com.wak.eatsmeet.dto.LoginRequest;
 import com.wak.eatsmeet.dto.TokenResponse;
 import com.wak.eatsmeet.dto.UserRegisterResponse;
+import com.wak.eatsmeet.model.user.Employees;
 import com.wak.eatsmeet.model.user.Users;
+import com.wak.eatsmeet.repository.user.EmployeeRepo;
 import com.wak.eatsmeet.repository.user.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -20,6 +22,9 @@ import java.util.Map;
 public class AuthService {
     @Autowired
     private UserRepo userRepo;
+
+    @Autowired
+    private EmployeeRepo employeeRepo;
 
     @Autowired
     private AuthenticationManager authenticationManager;
@@ -61,9 +66,21 @@ public class AuthService {
         String role = userDetails.getAuthorities().iterator().next().getAuthority().replace("ROLE_", "");
 
         String activeToken = jwtService.generateActiveToken(userDetails.getUsername(), role);
-
-        System.out.println(activeToken);
         String refreshToken = jwtService.generateRefreshToken(userDetails.getUsername(), role);
+        if(refreshToken != null){
+            System.out.println("1");
+            if(role.equals("USER")){
+                System.out.println("2");
+                Users users = userRepo.findById(Integer.valueOf(userDetails.getUsername())).orElseThrow(()-> new IllegalArgumentException("User not found with ID"));
+                users.setRefresh_token(refreshToken);
+                userRepo.save(users);
+            } else if(role.equals("EMPLOYEE") || role.equals("ADMIN") || role.equals("SUB_ADMIN")){
+                System.out.println("3");
+                Employees emp = employeeRepo.findById(Integer.valueOf(userDetails.getUsername())).orElseThrow(()-> new IllegalArgumentException("Employee not found with ID"));
+                emp.setRefresh_token(refreshToken);
+                employeeRepo.save(emp);
+            }
+        }
 
         return new TokenResponse(activeToken, refreshToken);
     }
