@@ -54,11 +54,9 @@ public class AuthService {
     }
 
     public TokenResponse verifyUser(LoginRequest loginRequest) {
-        System.out.println("t1" + loginRequest.getLogin() + loginRequest.getPassword());
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(loginRequest.getLogin(), loginRequest.getPassword())
         );
-        System.out.println("t2");
 
         if(!authentication.isAuthenticated()){
             throw new RuntimeException("Invalid credentials");
@@ -70,28 +68,15 @@ public class AuthService {
         String activeToken = jwtService.generateActiveToken(userDetails.getUsername(), role);
         String refreshToken = jwtService.generateRefreshToken(userDetails.getUsername(), role);
         if(refreshToken != null){
-            System.out.println("1");
             if(role.equals("USER")) {
-                System.out.println("2");
                 Users users = userRepo.findByEmail(userDetails.getUsername());
                 users.setRefresh_token(refreshToken);
                 userRepo.save(users);
-            }
-//            if(role.equals("ADMIN")){
-//                Employees emp = employeeRepo.findByEmail(userDetails.getUsername());
-//                System.out.println("found: " + emp.getRefresh_token());
-//                emp.setRefresh_token(null);
-//                employeeRepo.updateRefreshTokenByEmail(userDetails.getUsername(), refreshToken);
-//                System.out.println("found: " + emp.getRefresh_token());
-//            }
-             else if(role.equals("EMPLOYEE") || role.equals("ADMIN") || role.equals("SUB_ADMIN")){
-                System.out.println("3");
+
+            } else if(role.equals("EMPLOYEE") || role.equals("ADMIN") || role.equals("SUB_ADMIN")){
                 Employees emp = employeeRepo.findByEmail(userDetails.getUsername());
-                System.out.println("4");
                 emp.setRefresh_token(refreshToken);
-                System.out.println("5");
                 employeeRepo.save(emp);
-                System.out.println("6");
             }
 
         }
@@ -104,7 +89,6 @@ public class AuthService {
             String userLogin = jwtService.extractUserName(refreshToken);
             String role = jwtService.extractRole(refreshToken);
 
-            System.out.println("t1"+ userLogin + role);
             UserDetails userDetails = User.withUsername(userLogin).password("").roles(role).build();
             if(jwtService.validateToken(refreshToken, userDetails)){
                 String newActiveToken = jwtService.generateActiveToken(userLogin, role);

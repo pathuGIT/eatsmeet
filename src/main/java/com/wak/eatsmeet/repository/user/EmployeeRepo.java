@@ -22,8 +22,4 @@ public interface EmployeeRepo extends JpaRepository<Employees, Integer> {
 
     boolean existsByNic(String nic);
 
-    @Modifying
-    @Transactional
-    @Query("UPDATE Employees e SET e.refresh_token = :token WHERE e.email = :email")
-    void updateRefreshTokenByEmail(@Param("email") String email, @Param("token") String token);
 }
