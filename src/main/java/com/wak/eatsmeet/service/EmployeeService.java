@@ -82,4 +82,27 @@ public class EmployeeService {
 
         return mapToResponse(employees);
     }
+
+    public void deleteEmpById(int id) {
+        Employees employees = employeeRepo.findById(id).orElseThrow(
+                ()-> new IllegalArgumentException("Emp not found with ID: " + id));
+
+        employeeRepo.delete(employees);
+    }
+
+    public EmployeeResponse updateEmpById(int id, EmployeeResponse emp) {
+        Employees employees = employeeRepo.findById(id).orElseThrow(
+                ()-> new IllegalArgumentException("Emp not found with ID: " + id));
+
+        employees.setName(emp.getName());
+        employees.setNic(emp.getNic());
+        employees.setContact(emp.getContact());
+        employees.setBod(emp.getBod());
+        employees.setAddress(emp.getAddress());
+        employees.setActive(emp.getActive());
+        employees.setImg_url(emp.getImg_url());
+        employees.setEmail(emp.getEmail());
+
+        return mapToResponse(employeeRepo.save(employees));
+    }
 }

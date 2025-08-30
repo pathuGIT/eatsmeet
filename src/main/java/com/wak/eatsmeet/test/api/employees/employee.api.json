@@ -46,7 +46,7 @@
   {
     "name": "Delete a Employee by Admin",
     "method": "DELETE",
-    "url": "/api/emp?id=2",
+    "url": "/api/emp/delete/2",
     "headers": {
       "Authorization": "Bearer <SUPER_ADMIN_JWT_TOKEN>"
     },
@@ -55,7 +55,7 @@
   {
     "name": "Update a Employee by Admin",
     "method": "PUT",
-    "url": "/api/emp?id=2",
+    "url": "/api/emp/update/2",
     "headers": {
       "Authorization": "Bearer <SUPER_ADMIN_JWT_TOKEN>"
     },

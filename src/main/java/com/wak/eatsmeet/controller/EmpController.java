@@ -82,4 +82,30 @@ public class EmpController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ApiResponse<String>("An unexpected error occurred", null));
         }
     }
+
+    @DeleteMapping("/delete/{id}")
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public ResponseEntity<?> deleteEmpById(@PathVariable int id){
+        try {
+            employeeService.deleteEmpById(id);
+            return ResponseEntity.ok(new ApiResponse<Integer>("Successfully delete employee by id: "+ id, null));
+        } catch (IllegalArgumentException ex){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ApiResponse<String>(ex.getMessage(), null));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ApiResponse<String>("An unexpected error occurred", null));
+        }
+    }
+
+    @PutMapping("/update/{id}")
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public ResponseEntity<?> updateEmpById(@PathVariable int id, @RequestBody EmployeeResponse emp){
+        try {
+            EmployeeResponse res =  employeeService.updateEmpById(id, emp);
+            return ResponseEntity.ok(new ApiResponse<EmployeeResponse>("Successfully update employee by id: "+ id, res));
+        } catch (IllegalArgumentException ex){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ApiResponse<String>(ex.getMessage(), null));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ApiResponse<String>("An unexpected error occurred", null));
+        }
+    }
 }
