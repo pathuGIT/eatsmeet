@@ -7,6 +7,7 @@ import com.wak.eatsmeet.model.user.Employees;
 import com.wak.eatsmeet.model.user.Users;
 import com.wak.eatsmeet.repository.user.EmployeeRepo;
 import com.wak.eatsmeet.repository.user.UserRepo;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -19,6 +20,7 @@ import org.springframework.stereotype.Service;
 import java.util.Map;
 
 @Service
+@Transactional
 public class AuthService {
     @Autowired
     private UserRepo userRepo;
@@ -69,17 +71,29 @@ public class AuthService {
         String refreshToken = jwtService.generateRefreshToken(userDetails.getUsername(), role);
         if(refreshToken != null){
             System.out.println("1");
-            if(role.equals("USER")){
+            if(role.equals("USER")) {
                 System.out.println("2");
                 Users users = userRepo.findByEmail(userDetails.getUsername());
                 users.setRefresh_token(refreshToken);
                 userRepo.save(users);
-            } else if(role.equals("EMPLOYEE") || role.equals("ADMIN") || role.equals("SUB_ADMIN")){
+            }
+//            if(role.equals("ADMIN")){
+//                Employees emp = employeeRepo.findByEmail(userDetails.getUsername());
+//                System.out.println("found: " + emp.getRefresh_token());
+//                emp.setRefresh_token(null);
+//                employeeRepo.updateRefreshTokenByEmail(userDetails.getUsername(), refreshToken);
+//                System.out.println("found: " + emp.getRefresh_token());
+//            }
+             else if(role.equals("EMPLOYEE") || role.equals("ADMIN") || role.equals("SUB_ADMIN")){
                 System.out.println("3");
                 Employees emp = employeeRepo.findByEmail(userDetails.getUsername());
+                System.out.println("4");
                 emp.setRefresh_token(refreshToken);
+                System.out.println("5");
                 employeeRepo.save(emp);
+                System.out.println("6");
             }
+
         }
 
         return new TokenResponse(activeToken, refreshToken);

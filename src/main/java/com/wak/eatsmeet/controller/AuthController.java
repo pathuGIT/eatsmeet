@@ -37,7 +37,6 @@ public class AuthController {
 
     @PostMapping("/register")
     public ResponseEntity<?> userRegister(@Valid @RequestBody Users users, BindingResult result){
-        System.out.println("test1");
         if (result.hasErrors()) {
             // Collect error messages
             List<String> errors = result.getAllErrors()
