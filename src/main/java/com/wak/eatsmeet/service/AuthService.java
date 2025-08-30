@@ -54,7 +54,7 @@ public class AuthService {
     public TokenResponse verifyUser(LoginRequest loginRequest) {
         System.out.println("t1" + loginRequest.getLogin() + loginRequest.getPassword());
         Authentication authentication = authenticationManager.authenticate(
-            new UsernamePasswordAuthenticationToken(loginRequest.getLogin(), loginRequest.getPassword())
+                new UsernamePasswordAuthenticationToken(loginRequest.getLogin(), loginRequest.getPassword())
         );
         System.out.println("t2");
 
@@ -71,12 +71,12 @@ public class AuthService {
             System.out.println("1");
             if(role.equals("USER")){
                 System.out.println("2");
-                Users users = userRepo.findById(Integer.valueOf(userDetails.getUsername())).orElseThrow(()-> new IllegalArgumentException("User not found with ID"));
+                Users users = userRepo.findByEmail(userDetails.getUsername());
                 users.setRefresh_token(refreshToken);
                 userRepo.save(users);
             } else if(role.equals("EMPLOYEE") || role.equals("ADMIN") || role.equals("SUB_ADMIN")){
                 System.out.println("3");
-                Employees emp = employeeRepo.findById(Integer.valueOf(userDetails.getUsername())).orElseThrow(()-> new IllegalArgumentException("Employee not found with ID"));
+                Employees emp = employeeRepo.findByEmail(userDetails.getUsername());
                 emp.setRefresh_token(refreshToken);
                 employeeRepo.save(emp);
             }
@@ -100,5 +100,28 @@ public class AuthService {
             throw new RuntimeException(e);
         }
         throw new RuntimeException("Error generate refresh token.");
+    }
+
+    public Map<String, String> logout(String username, String role) {
+
+        if(role.equals("USER")){
+            Users user = userRepo.findByEmail(username);
+
+            if (user != null) {
+                user.setRefresh_token(null);
+                userRepo.save(user);
+                return Map.of("msg", "User "+ username + " successfully logout.");
+            }
+        }else{
+            Employees emp = employeeRepo.findByEmail(username);
+
+            if (emp != null) {
+                emp.setRefresh_token(null);
+                employeeRepo.save(emp);
+                return Map.of("msg", "Emp "+ username + " successfully logout.");
+            }
+        }
+
+        throw new RuntimeException("Error Logout.");
     }
 }

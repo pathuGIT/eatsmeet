@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
@@ -92,4 +93,24 @@ public class AuthController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ApiResponse<String>("failed", e.getMessage()));
         }
     }
+
+    @PutMapping("/logout")
+    @PreAuthorize("hasAuthority('USER') or hasAuthority('ADMIN') or hasAuthority('SUB_ADMIN')")
+    public ResponseEntity<?> logout(Authentication authentication) {
+        // `authentication` will be filled by Spring Security from your JWT
+        String username = authentication.getName(); // usually the email/contact (subject)
+        String role = authentication.getAuthorities().iterator().next().getAuthority();
+
+        System.out.println("Logout user: " + username + " | Role: " + role);
+
+        try {
+            Map<String, String> res = authService.logout(username, role);
+            return ResponseEntity.ok(new ApiResponse<>("Logout successful", res));
+        } catch (IllegalArgumentException ex) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body(new ApiResponse<>("Error Logout", ex.getMessage()));
+        }
+    }
+
+
 }
