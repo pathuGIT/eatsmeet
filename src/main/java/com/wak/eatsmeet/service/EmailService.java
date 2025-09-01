@@ -32,4 +32,24 @@ public class EmailService {
 
         mailSender.send(message);
     }
+
+    public void sendCredentialsToSubAdmin(String email) throws MessagingException {
+        String registerLink = "http://localhost:8080/api/emp/register?token=";
+
+        String htmlMsg = "<h2>Email Verification</h2>"
+                + "<p>Click on ths link to register to your account:</p>"
+                + "<p>!!Important this Will expire in 24 hours.</p>"
+                + "<a href=\"" + registerLink + "\">Register link</a>";
+
+        MimeMessage message = mailSender.createMimeMessage();
+
+        MimeMessageHelper helper = new MimeMessageHelper(message, true);
+        helper.setFrom("flexicraftcon@gmail.com");
+        helper.setTo(email);
+        helper.setSubject("Register Your Account");
+
+        helper.setText(htmlMsg, true);
+
+        mailSender.send(message);
+    }
 }

@@ -1,17 +1,14 @@
 [
   {
-    "name": "Send SUB_ADMIN Credentials to the Employee Mail",
+    "name": "Send register link to SUB_ADMIN",
     "method": "PUT",
-    "url": "/api/mail/emp?id=2",
+    "url": "/api/mail/credentials?mail=pathumwannige@gmail.com",
     "headers": {
       "Authorization": "Bearer <SUPER_ADMIN_JWT_TOKEN>"
     },
     "role": "ADMIN",
     "body": {
-      "role": "SUB ADMIN",
-      "email": "exmpl@gmail.com",
-      "contact": "0741231231",
-      "password": "ZxbG@87"
+      "link": "http://localhost:8080/api/emp/register?token=.........."
     }
   },
   {
