@@ -78,8 +78,7 @@
     },
     "role": "ADMIN",
     "body": {
-      "role": "SUB_ADMIN",
-      "password": "ZxbG@87"
+      "role": "SUB_ADMIN"
     }
   }
 ]

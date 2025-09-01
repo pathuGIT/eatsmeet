@@ -46,7 +46,7 @@ public class JwtService {
                     .claim("role", role)           // custom claim
                     .subject(username)
                     .issuedAt(new Date(System.currentTimeMillis()))
-                    .expiration(new Date(System.currentTimeMillis() + 1000L * 60 * 60 * 24 * 2))
+                    .expiration(new Date(System.currentTimeMillis() + 1000L * 60 * 60 * 5))
                     .signWith(secretKey, SignatureAlgorithm.HS256)
                     .compact();
         } catch (InvalidKeyException e) {
@@ -60,7 +60,7 @@ public class JwtService {
                     .claim("role", role)           // custom claim
                     .subject(username)
                     .issuedAt(new Date(System.currentTimeMillis()))
-                    .expiration(new Date(System.currentTimeMillis() + 1000L * 60 * 60 * 24))
+                    .expiration(new Date(System.currentTimeMillis() + 1000L * 60 * 60 * 2))
                     .signWith(secretKey, SignatureAlgorithm.HS256)
                     .compact();
         } catch (InvalidKeyException e) {
@@ -81,12 +81,20 @@ public class JwtService {
         }
     }
 
-
     public boolean validateToken(String token, UserDetails userDetails) {
         try {
             String username = extractUserName(token);
             Date expiration = extractExpiration(token);
             return username.equals(userDetails.getUsername()) && !expiration.before(new Date());
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public boolean validateRegisterToken(String token) {
+        try {
+            Date expiration = extractExpiration(token);
+            return !expiration.before(new Date());
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

@@ -39,6 +39,14 @@
     }
   },
   {
+    "name": "Register Sub Admin by entering pswd",
+    "method": "POST",
+    "url": "/api/auth/emp/register?token=....",
+    "body": {
+      "password": "abcd.efgh.ijkl"
+    }
+  },
+  {
     "name": "Logout from account",
     "method": "POST",
     "url": "/api/auth/logout",

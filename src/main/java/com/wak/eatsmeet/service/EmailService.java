@@ -38,7 +38,7 @@ public class EmailService {
 
     public void sendCredentialsToSubAdmin(String email) throws MessagingException {
         String token = jwtService.generateRegisterToken(email, "EMPLOYEE");
-        String registerLink = "http://localhost:8080/api/emp/register?token="+token;
+        String registerLink = "http://localhost:8080/api/auth/emp/register?token="+token;
         System.out.println(token);
         System.out.println(registerLink);
 

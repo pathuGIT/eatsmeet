@@ -4,6 +4,7 @@ import com.wak.eatsmeet.dto.LoginRequest;
 import com.wak.eatsmeet.dto.TokenResponse;
 import com.wak.eatsmeet.dto.UserRegisterResponse;
 import com.wak.eatsmeet.model.user.Employees;
+import com.wak.eatsmeet.model.user.Roles;
 import com.wak.eatsmeet.model.user.Users;
 import com.wak.eatsmeet.repository.user.EmployeeRepo;
 import com.wak.eatsmeet.repository.user.UserRepo;
@@ -121,5 +122,26 @@ public class AuthService {
         }
 
         throw new RuntimeException("Error Logout.");
+    }
+
+    public String subAdminRegister(String token, String password) {
+        if(jwtService.validateRegisterToken(token)){
+            String email = jwtService.extractUserName(token);
+
+            Employees emp = employeeRepo.findByEmail(email);
+            if(emp == null){
+                throw new RuntimeException("This Emp is not valid.");
+            }
+            if(emp.getRole() != Roles.SUB_ADMIN){
+                throw new RuntimeException("This Emp is not Sub Admin.");
+            }
+
+            emp.setPassword(bCryptPasswordEncoder.encode(password));
+            emp.setActive(true);
+
+            employeeRepo.save(emp);
+            return "Sub Admin registered successfully.";
+        }
+        return "Token is not valid..";
     }
 }

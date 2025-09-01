@@ -111,5 +111,24 @@ public class AuthController {
         }
     }
 
+    @PostMapping("/emp/register")
+    public ResponseEntity<?> subAdminRegister(@RequestParam String token, @RequestBody  Map<String, String> request){
 
+        try {
+
+            String password = request.get("password");
+
+            String res = authService.subAdminRegister(token, password);
+            ApiResponse<String> response = new ApiResponse<>();
+            response.setMessage("Sub Admin registered successfully!");
+            response.setData(res);
+            return ResponseEntity.ok(res);
+
+
+        } catch (IllegalArgumentException ex){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ApiResponse<String>(ex.getMessage(), null));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ApiResponse<String>("An unexpected error occurred", null));
+        }
+    }
 }
