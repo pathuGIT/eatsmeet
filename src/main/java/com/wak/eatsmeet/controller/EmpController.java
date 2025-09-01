@@ -129,7 +129,7 @@ public class EmpController {
         }
 
         try {
-            EmployeeResponse res = employeeService.updateEmpRole(id, request.getRole(), request.getPswd());
+            EmployeeResponse res = employeeService.updateEmpRole(id, request.getRole());
             return ResponseEntity.ok(new ApiResponse<>("Successfully updated employee role by id: " + id, res));
         } catch (IllegalArgumentException ex) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ApiResponse<>(ex.getMessage(), null));
