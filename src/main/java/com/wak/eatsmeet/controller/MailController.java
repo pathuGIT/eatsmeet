@@ -32,7 +32,7 @@ public class MailController {
 
     @PostMapping("/credentials") //send credentials to sub admin
     @PreAuthorize("hasAuthority('ADMIN')")
-    public ResponseEntity<?> sentCredentials(@PathVariable String email){
+    public ResponseEntity<?> sentCredentials(@RequestParam String email){
         try {
             emailService.sendCredentialsToSubAdmin(email);
             return ResponseEntity.ok(new ApiResponse<String>("Register link sent to mail: " + email, null) );

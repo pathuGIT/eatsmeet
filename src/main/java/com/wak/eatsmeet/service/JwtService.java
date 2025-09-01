@@ -54,6 +54,20 @@ public class JwtService {
         }
     }
 
+    public String generateRegisterToken(String username, String role) {
+        try {
+            return Jwts.builder()
+                    .claim("role", role)           // custom claim
+                    .subject(username)
+                    .issuedAt(new Date(System.currentTimeMillis()))
+                    .expiration(new Date(System.currentTimeMillis() + 1000L * 60 * 60 * 24))
+                    .signWith(secretKey, SignatureAlgorithm.HS256)
+                    .compact();
+        } catch (InvalidKeyException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public String extractUserName(String token) {
         try {
             return Jwts.parser()
