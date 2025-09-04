@@ -44,4 +44,19 @@ public class CurryService {
 
         return list;
     }
+
+    public Curry updateCurry(int id, Curry curryRequest) {
+        if(!curryRepo.existsById(id)){
+            throw new IllegalArgumentException("No curry found with id: " + id);
+        }
+
+        Curry curry = curryRepo.findById(id).get();
+
+        curry.setName(curryRequest.getName());
+        curry.setPrice(curryRequest.getPrice());
+        curry.setDetails(curryRequest.getDetails());
+        curry.setImg_url(curryRequest.getImg_url());
+
+        return curryRepo.save(curry);
+    }
 }

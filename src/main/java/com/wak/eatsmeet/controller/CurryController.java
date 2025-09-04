@@ -43,6 +43,29 @@ public class CurryController {
         }
     }
 
+    @PutMapping("/update/{id}")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('SUB_ADMIN')")
+    public ResponseEntity<?> updateCurry(@Valid @PathVariable int id, @RequestBody Curry curryRequest, BindingResult result){
+        if (result.hasErrors()) {
+            // Collect error messages
+            List<String> errors = result.getAllErrors()
+                    .stream()
+                    .map(ObjectError::getDefaultMessage)
+                    .toList();
+
+            return ResponseEntity.badRequest().body(new ApiResponse<List<String>>( "Invalid inputs",errors));
+        }
+
+        try {
+            Curry res = curryService.updateCurry(id,curryRequest);
+            return ResponseEntity.ok(new ApiResponse<Curry>("Curry updated successfully", res));
+        } catch (IllegalArgumentException e){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ApiResponse<String>(e.getMessage(), null));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ApiResponse<String>("An unexpected error occurred", null));
+        }
+    }
+
     @GetMapping("/all")
     public ResponseEntity<?> getAllCurry(){
         try {
