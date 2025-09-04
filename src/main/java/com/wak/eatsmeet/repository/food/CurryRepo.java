@@ -6,4 +6,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface CurryRepo extends JpaRepository<Curry, Integer> {
+
+    boolean existsByName(String name);
 }

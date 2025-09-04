@@ -2,7 +2,7 @@
   {
     "name": "Create Curry",
     "method": "POST",
-    "url": "/api/curry",
+    "url": "/api/curry/add",
     "role": "ADMIN/SUB_ADMIN",
     "headers": {
       "Content-Type": "application/json"
