@@ -16,13 +16,12 @@
   {
     "name": "Get All Curries",
     "method": "GET",
-    "url": "/api/curry/all",
-    "role": "USER/ADMIN/SUB_ADMIN"
+    "url": "/api/curry/all"
   },
   {
     "name": "Get Curry by ID",
     "method": "GET",
-    "url": "/api/curry/search?id=2",
+    "url": "/api/curry/{2}",
     "role": "USER/ADMIN/SUB_ADMIN"
   },
   {
@@ -48,8 +47,7 @@
   {
     "name": "Search Curry bu name",
     "method": "GET",
-    "url": "/api/curry/search?name=masala",
-    "role": "ADMIN/SUB_ADMIN/USER"
+    "url": "/api/curry/search-name?name=masala"
   },
   {
     "name": "Search Curry bu range of price",

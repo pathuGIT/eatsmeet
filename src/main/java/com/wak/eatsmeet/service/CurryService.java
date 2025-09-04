@@ -34,4 +34,14 @@ public class CurryService {
         }
         return curryRepo.findById(id).get();
     }
+
+    public List<Curry> getByName(String name) {
+        List<Curry> list = curryRepo.findAllByNameContaining(name);
+
+        if(list.isEmpty()){
+            throw new IllegalArgumentException("No curry found with name: " + name);
+        }
+
+        return list;
+    }
 }
