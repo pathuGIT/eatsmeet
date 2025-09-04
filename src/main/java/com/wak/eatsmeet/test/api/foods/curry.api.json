@@ -52,7 +52,7 @@
   {
     "name": "Search Curry bu range of price",
     "method": "GET",
-    "url": "/api/curry/search?min=0&max=200",
+    "url": "/api/curry/searchPrice?min=0&max=200",
     "role": "ADMIN/SUB_ADMIN/USER"
   }
 ]

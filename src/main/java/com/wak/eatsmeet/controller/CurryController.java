@@ -116,5 +116,16 @@ public class CurryController {
         }
     }
 
+    @GetMapping("/searchPrice")
+    public ResponseEntity<?> findAllCurryWithRangePrice(@RequestParam int min, @RequestParam int max){
+        try {
+            List<Curry> res = curryService.getAll(min, max);
+            return ResponseEntity.ok(new ApiResponse<List<Curry>>("Get all curries successfully", res));
+        } catch (IllegalArgumentException e){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ApiResponse<String>(e.getMessage(), null));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ApiResponse<String>("An unexpected error occurred", null));
+        }
+    }
 
 }

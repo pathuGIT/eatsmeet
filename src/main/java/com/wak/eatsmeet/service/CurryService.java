@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class CurryService {
@@ -67,5 +68,14 @@ public class CurryService {
         Curry curry = curryRepo.findById(id).get();
         curryRepo.deleteById(id);
         return curry;
+    }
+
+    public List<Curry> getAll(int min, int max) {
+        if(curryRepo.findAll().isEmpty()) {
+            throw new IllegalArgumentException("No curries found");
+        }
+        return curryRepo.findAll().stream()
+                .filter(curry -> curry.getPrice() >= min && curry.getPrice() <= max)
+                .collect(Collectors.toList());
     }
 }
