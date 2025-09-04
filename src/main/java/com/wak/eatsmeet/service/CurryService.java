@@ -59,4 +59,13 @@ public class CurryService {
 
         return curryRepo.save(curry);
     }
+
+    public Curry deleteById(int id) {
+        if(!curryRepo.existsById(id)){
+            throw new IllegalArgumentException("No curry found with id: " + id);
+        }
+        Curry curry = curryRepo.findById(id).get();
+        curryRepo.deleteById(id);
+        return curry;
+    }
 }

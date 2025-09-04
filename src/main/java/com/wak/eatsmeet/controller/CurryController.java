@@ -66,6 +66,19 @@ public class CurryController {
         }
     }
 
+    @DeleteMapping("/deleteId/{id}")
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public ResponseEntity<?> deleteById(@PathVariable int id){
+        try {
+            Curry res = curryService.deleteById(id);
+            return ResponseEntity.ok(new ApiResponse<Curry>("curry deleted successfully", res));
+        } catch (IllegalArgumentException e){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ApiResponse<String>(e.getMessage(), null));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ApiResponse<String>("An unexpected error occurred", null));
+        }
+    }
+
     @GetMapping("/all")
     public ResponseEntity<?> getAllCurry(){
         try {
