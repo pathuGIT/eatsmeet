@@ -5,6 +5,8 @@ import com.wak.eatsmeet.repository.food.CurryRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class CurryService {
     @Autowired
@@ -17,5 +19,12 @@ public class CurryService {
         }
 
         return curryRepo.save(curryRequest);
+    }
+
+    public List<Curry> getAll() {
+        if(curryRepo.findAll().isEmpty()) {
+            throw new IllegalArgumentException("No curries found");
+        }
+        return curryRepo.findAll();
     }
 }

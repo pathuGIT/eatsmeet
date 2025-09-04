@@ -16,7 +16,7 @@
   {
     "name": "Get All Curries",
     "method": "GET",
-    "url": "/api/curry",
+    "url": "/api/curry/all",
     "role": "USER/ADMIN/SUB_ADMIN"
   },
   {

@@ -10,10 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -45,4 +42,18 @@ public class CurryController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ApiResponse<String>("An unexpected error occurred", null));
         }
     }
+
+    @GetMapping("/all")
+    @PreAuthorize("hasAuthority('USER') or hasAuthority('ADMIN') or hasAuthority('SUB_ADMIN')")
+    public ResponseEntity<?> getAllCurry(){
+        try {
+            List<Curry> res = curryService.getAll();
+            return ResponseEntity.ok(new ApiResponse<List<Curry>>("Curry added successfully", res));
+        } catch (IllegalArgumentException e){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ApiResponse<String>(e.getMessage(), null));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ApiResponse<String>("An unexpected error occurred", null));
+        }
+    }
+    
 }
