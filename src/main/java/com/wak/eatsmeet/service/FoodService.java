@@ -5,6 +5,8 @@ import com.wak.eatsmeet.repository.food.FoodRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class FoodService {
     @Autowired
@@ -15,5 +17,12 @@ public class FoodService {
             throw new RuntimeException("Food already exists");
         }
         return foodRepo.save(food);
+    }
+
+    public List<Foods> getAll() {
+        if(foodRepo.findAll().isEmpty()) {
+            throw new IllegalArgumentException("No curries found");
+        }
+        return foodRepo.findAll();
     }
 }

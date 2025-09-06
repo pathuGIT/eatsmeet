@@ -2,18 +2,16 @@
   {
     "name": "Create Food",
     "method": "POST",
-    "url": "/api/food",
+    "url": "/api/food/add",
     "role": "ADMIN/SUB_ADMIN",
     "headers": {
       "Content-Type": "application/json"
     },
     "body": {
-      "name": "Rice",
-      "curryIds": [
-        1,
-        2,
-        3
-      ]
+      "name":"Biriyani",
+      "price":850.00,
+      "details":"Chicken mix",
+      "img_url":""
     }
   },
   {
