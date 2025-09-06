@@ -23,7 +23,7 @@
   {
     "name": "Get Food by ID",
     "method": "GET",
-    "url": "/api/food/1",
+    "url": "/api/food/searchBy/{id}",
     "role": "USER/ADMIN/SUB_ADMIN"
   },
   {

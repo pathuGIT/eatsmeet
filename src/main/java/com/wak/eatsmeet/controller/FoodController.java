@@ -58,4 +58,17 @@ public class FoodController {
         }
     }
 
+    // Get Food by ID
+    @GetMapping("/searchBy/{id}")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('SUB_ADMIN')")
+    public ResponseEntity<?> getCurryById(@PathVariable int id){
+        try {
+            Foods res = foodService.getById(id);
+            return ResponseEntity.ok(new ApiResponse<Foods>("Get curry successfully", res));
+        } catch (IllegalArgumentException e){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ApiResponse<String>(e.getMessage(), null));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ApiResponse<String>("An unexpected error occurred", null));
+        }
+    }
 }

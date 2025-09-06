@@ -21,8 +21,15 @@ public class FoodService {
 
     public List<Foods> getAll() {
         if(foodRepo.findAll().isEmpty()) {
-            throw new IllegalArgumentException("No curries found");
+            throw new IllegalArgumentException("Empty foods.");
         }
         return foodRepo.findAll();
+    }
+
+    public Foods getById(int id) {
+        if(!foodRepo.existsById(id)) {
+            throw new IllegalArgumentException("No Food found with id: " + id);
+        }
+        return foodRepo.findById(id).get();
     }
 }
