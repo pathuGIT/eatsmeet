@@ -26,7 +26,7 @@ public class SecureConfig {
                         .requestMatchers("/api/auth/login", "/api/auth/register", "/api/auth/refresh-token", "/api/auth/emp/register").permitAll()
                         .requestMatchers("/api/mail/validate-link").permitAll()
                         .requestMatchers("/api/curry/all", "/api/curry/searchName/{name}", "/api/curry/searchPrice").permitAll()
-                        .requestMatchers("/api/food/all").permitAll()
+                        .requestMatchers("/api/food/all", "/api/food/searchByName/{name}").permitAll()
                         .anyRequest().authenticated())
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();

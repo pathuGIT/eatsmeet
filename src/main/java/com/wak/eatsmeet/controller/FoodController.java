@@ -108,4 +108,17 @@ public class FoodController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ApiResponse<String>(e.getMessage(), null));
         }
     }
+
+    // Search Foods by name
+    @GetMapping("/searchByName/{name}")
+    public ResponseEntity<?> getFoodByName(@PathVariable String name){
+        try {
+            List<Foods> res = foodService.getByName(name);
+            return ResponseEntity.ok(new ApiResponse<List<Foods>>("Food found success.", res));
+        } catch (IllegalArgumentException e){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ApiResponse<String>(e.getMessage(), null));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ApiResponse<String>(e.getMessage(), null));
+        }
+    }
 }

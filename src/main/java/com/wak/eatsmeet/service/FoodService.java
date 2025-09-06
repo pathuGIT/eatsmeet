@@ -57,4 +57,14 @@ public class FoodService {
         foodRepo.deleteById(id);
         return foods;
     }
+
+    public List<Foods> getByName(String name) {
+        List<Foods> list = foodRepo.findAllByNameContaining(name);
+
+        if(list.isEmpty()){
+            throw new IllegalArgumentException("No Foods found with name: " + name);
+        }
+
+        return list;
+    }
 }

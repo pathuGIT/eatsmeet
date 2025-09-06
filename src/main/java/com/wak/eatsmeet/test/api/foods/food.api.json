@@ -50,8 +50,8 @@
   {
     "name": "Search Foods by name",
     "method": "GET",
-    "url": "/api/food/search?name=rice",
-    "role": "USER/ADMIN/SUB_ADMIN"
+    "url": "/api/food/searchByName/{name}",
+    "role": ""
   },
   {
     "name": "Search Foods by price",
