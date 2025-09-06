@@ -71,4 +71,27 @@ public class FoodController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ApiResponse<String>("An unexpected error occurred", null));
         }
     }
+
+    @PutMapping("/update/{id}")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('SUB_ADMIN')")
+    public ResponseEntity<?> updateFood(@Valid @PathVariable int id, @RequestBody Foods foods, BindingResult result){
+        if (result.hasErrors()) {
+            // Collect error messages
+            List<String> errors = result.getAllErrors()
+                    .stream()
+                    .map(ObjectError::getDefaultMessage)
+                    .toList();
+
+            return ResponseEntity.badRequest().body(new ApiResponse<List<String>>( "Invalid inputs",errors));
+        }
+
+        try {
+            Foods res = foodService.updateFood(id, foods);
+            return ResponseEntity.ok(new ApiResponse<Foods>("Food updated successfully", res));
+        } catch (IllegalArgumentException e){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ApiResponse<String>(e.getMessage(), null));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ApiResponse<String>("An unexpected error occurred", null));
+        }
+    }
 }

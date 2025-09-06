@@ -1,5 +1,6 @@
 package com.wak.eatsmeet.service;
 
+import com.wak.eatsmeet.model.food.Curry;
 import com.wak.eatsmeet.model.food.Foods;
 import com.wak.eatsmeet.repository.food.FoodRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,5 +32,20 @@ public class FoodService {
             throw new IllegalArgumentException("No Food found with id: " + id);
         }
         return foodRepo.findById(id).get();
+    }
+
+    public Foods updateFood(int id, Foods result) {
+        if(!foodRepo.existsById(id)){
+            throw new IllegalArgumentException("No Food found with id: " + id);
+        }
+
+        Foods food = foodRepo.findById(id).get();
+
+        food.setName(result.getName());
+        food.setPrice(result.getPrice());
+        food.setDetails(result.getDetails());
+        food.setImg_url(result.getImg_url());
+
+        return foodRepo.save(food);
     }
 }

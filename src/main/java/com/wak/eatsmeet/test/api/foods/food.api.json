@@ -29,15 +29,16 @@
   {
     "name": "Update Food",
     "method": "PUT",
-    "url": "/api/food/1",
+    "url": "/api/food/update",
     "role": "ADMIN/SUB_ADMIN",
     "headers": {
       "Content-Type": "application/json"
     },
     "body": {
-      "name": "Vegetable Rice",
-      "price": 36.00,
-      "detail": "Try this one."
+      "name":"Biriyani",
+      "price":850.00,
+      "details":"Chicken mix",
+      "img_url":""
     }
   },
   {
