@@ -44,8 +44,8 @@
   {
     "name": "Delete Food",
     "method": "DELETE",
-    "url": "/api/food/1",
-    "role": "ADMIN/SUB_ADMIN"
+    "url": "/api/food/deleteBy/1",
+    "role": "ADMIN"
   },
   {
     "name": "Search Foods by name",

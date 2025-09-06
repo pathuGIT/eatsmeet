@@ -48,4 +48,13 @@ public class FoodService {
 
         return foodRepo.save(food);
     }
+
+    public Foods deleteById(int id) {
+        if(!foodRepo.existsById(id)){
+            throw new IllegalArgumentException("No curry found with id: " + id);
+        }
+        Foods foods = foodRepo.findById(id).get();
+        foodRepo.deleteById(id);
+        return foods;
+    }
 }
