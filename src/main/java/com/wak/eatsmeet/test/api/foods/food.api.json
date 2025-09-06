@@ -56,7 +56,7 @@
   {
     "name": "Search Foods by price",
     "method": "GET",
-    "url": "/api/food/search?price=200",
+    "url": "/api/food/searchByPrice?price=200",
     "role": "USER/ADMIN/SUB_ADMIN"
   },
   {

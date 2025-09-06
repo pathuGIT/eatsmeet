@@ -121,4 +121,17 @@ public class FoodController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ApiResponse<String>(e.getMessage(), null));
         }
     }
+
+    //Search Foods by price
+    @GetMapping("/searchByPrice")
+    public ResponseEntity<?> findAllFoodWithRangePrice(@RequestParam int min, @RequestParam int max){
+        try {
+            List<Foods> res = foodService.getByPrice(min, max);
+            return ResponseEntity.ok(new ApiResponse<List<Foods>>("Filter foods by price success", res));
+        } catch (IllegalArgumentException e){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ApiResponse<String>(e.getMessage(), null));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ApiResponse<String>(e.getMessage(), null));
+        }
+    }
 }
