@@ -19,7 +19,7 @@
   {
     "name": "Remove Food from Curry",
     "method": "DELETE",
-    "url": "/api/curry/2/remove-food/1",
+    "url": "/api/curry/remove-food-curry/1",
     "role": "ADMIN/SUB_ADMIN"
   }
 ]
