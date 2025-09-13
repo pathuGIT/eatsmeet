@@ -64,4 +64,15 @@ public class CurryFoodService {
 
         return dtos;
     }
+
+    public List<Foods> getFoodsByCurryId(int curryId) {
+        System.out.println("t2");
+        if(!foodCurryRepo.existsByCurryId(curryId)){
+            throw new IllegalArgumentException("No Foods found for this curry");
+        }
+        System.out.println("t3");
+        List<Foods> foodsCurryList = foodCurryRepo.findDistinctFoodsByCurryId(curryId);
+
+        return foodsCurryList;
+    }
 }

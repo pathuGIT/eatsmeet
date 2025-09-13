@@ -21,9 +21,6 @@ public class CurryFoodController {
     @Autowired
     private CurryFoodService curryFoodService;
 
-    //Get All Foods for a Curry
-    //public List<Foodd>
-
     //Assign Food to Curry
     @PostMapping("/{curryId}/add-food")
     @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('SUB_ADMIN')")
@@ -39,10 +36,19 @@ public class CurryFoodController {
 
     }
 
-    @GetMapping("/get")
-    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('SUB_ADMIN')")
-    public String getFoodsByCurryId(){
-        System.out.println("Hello curry");
-        return "Curry";
+    //Get All Foods for a Curry
+    @GetMapping("/{curryId}/foods")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('SUB_ADMIN') or hasAuthority('USER')")
+    public ResponseEntity<?> getFoodsByCurryId(@PathVariable int curryId){
+        try {
+            System.out.println("t1");
+            List<Foods> response = curryFoodService.getFoodsByCurryId(curryId);
+            return ResponseEntity.ok(new ApiResponse<List<Foods>>("Foods fetched successfully", response));
+        } catch (IllegalArgumentException ex) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ApiResponse<String>(ex.getMessage(), null));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ApiResponse<String>(e.getMessage(), null));
+        }
+
     }
 }

@@ -8,8 +8,13 @@
   {
     "name": "Assign Food to Curry",
     "method": "POST",
-    "url": "/api/curry/2/add-food/1",
-    "role": "ADMIN/SUB_ADMIN"
+    "url": "/api/curry/2/add-food",
+    "role": "ADMIN/SUB_ADMIN",
+    "body": {
+      "foodId": [1, 2],
+      "date": "2025-09-13",
+      "times": "BREAK_FAST"
+    }
   },
   {
     "name": "Remove Food from Curry",
