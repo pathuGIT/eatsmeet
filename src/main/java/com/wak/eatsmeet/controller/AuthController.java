@@ -49,7 +49,7 @@ public class AuthController {
 
         try {
             users.setRole(UserRole.USER);
-            users.setActive(true);
+            users.setActive(false);
             users.setImg_url(null);
 
             UserRegisterResponse res = authService.userRegister(users);
@@ -130,5 +130,11 @@ public class AuthController {
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ApiResponse<String>("An unexpected error occurred", null));
         }
+    }
+
+    @PostMapping("/user/activate/token/{token}")
+    public ResponseEntity<?> activeUsers(@PathVariable String token){
+        //Users users = authService.activeUsers(token);
+        return null;
     }
 }

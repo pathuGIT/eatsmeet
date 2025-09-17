@@ -144,4 +144,10 @@ public class AuthService {
         }
         return "Token is not valid..";
     }
+
+//    public Users activeUsers(String token) {
+//        if(jwtService.validateRegisterToken(token)){
+//
+//        }
+//    }
 }

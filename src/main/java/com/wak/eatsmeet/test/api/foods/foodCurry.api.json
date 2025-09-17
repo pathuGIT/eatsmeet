@@ -14,7 +14,7 @@
   {
     "name": "Get All Curries for a Food",
     "method": "GET",
-    "url": "/api/food/1/curries",
+    "url": "/api/food/{foodId}/date/{date}/time/{time}",
     "role": "USER/ADMIN/SUB_ADMIN"
   }
 ]
