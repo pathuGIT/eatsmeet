@@ -132,9 +132,9 @@ public class AuthController {
         }
     }
 
-    @PostMapping("/user/activate/token/{token}")
-    public ResponseEntity<?> activeUsers(@PathVariable String token){
-        //Users users = authService.activeUsers(token);
-        return null;
-    }
+//    @PostMapping("/user/activate/token/{token}")
+//    public ResponseEntity<?> activeUsers(@PathVariable String token){
+//        //Users users = authService.activeUsers(token);
+//        return null;
+//    }
 }

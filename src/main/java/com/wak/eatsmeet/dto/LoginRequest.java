@@ -1,15 +1,6 @@
 package com.wak.eatsmeet.dto;
 
 import jakarta.validation.constraints.NotBlank;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
-@NoArgsConstructor
-@AllArgsConstructor
-@Getter
-@Setter
 public class LoginRequest {
 
     @NotBlank(message = "Name is required")
@@ -17,4 +8,28 @@ public class LoginRequest {
 
     @NotBlank(message = "Name is required")
     private String password;
+
+    public LoginRequest(String login, String password) {
+        this.login = login;
+        this.password = password;
+    }
+
+    public LoginRequest() {
+    }
+
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 }
