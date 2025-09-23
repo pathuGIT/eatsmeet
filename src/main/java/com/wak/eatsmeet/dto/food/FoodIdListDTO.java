@@ -12,6 +12,16 @@ public class FoodIdListDTO {
     private String times;
     private String img_url;
 
+    public FoodIdListDTO(List<Integer> foodId, LocalDate date, String times, String img_url) {
+        this.foodId = foodId;
+        this.date = date;
+        this.times = times;
+        this.img_url = img_url;
+    }
+
+    public FoodIdListDTO() {
+    }
+
     public List<Integer> getFoodId() {
         return foodId;
     }

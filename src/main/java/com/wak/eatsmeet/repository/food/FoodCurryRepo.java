@@ -27,4 +27,5 @@ public interface FoodCurryRepo extends JpaRepository<FoodsCurry, Integer> {
     List<Curry> findDistinctCurryByFoods_IdAndDateAndTimes(@Param("foodId") int foodId,
                                                            @Param("date") LocalDate date,
                                                            @Param("times") Times times);
+
 }

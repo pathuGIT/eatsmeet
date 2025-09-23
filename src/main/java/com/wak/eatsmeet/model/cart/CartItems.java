@@ -2,18 +2,10 @@ package com.wak.eatsmeet.model.cart;
 
 import com.wak.eatsmeet.model.food.enums.ItemTypes;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import java.util.Date;
 
 @Entity
-@NoArgsConstructor
-@AllArgsConstructor
-@Getter
-@Setter
 public class CartItems {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,4 +25,82 @@ public class CartItems {
     @ManyToOne
     @JoinColumn(name = "cart_id", referencedColumnName = "cart_id")
     private Cart cart;
+
+    public CartItems(int id, int item_id, ItemTypes itemTypes, double quantity, double price, Date created_date, boolean selected, Cart cart) {
+        this.id = id;
+        this.item_id = item_id;
+        this.itemTypes = itemTypes;
+        this.quantity = quantity;
+        this.price = price;
+        this.created_date = created_date;
+        this.selected = selected;
+        this.cart = cart;
+    }
+
+    public CartItems() {
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getItem_id() {
+        return item_id;
+    }
+
+    public void setItem_id(int item_id) {
+        this.item_id = item_id;
+    }
+
+    public ItemTypes getItemTypes() {
+        return itemTypes;
+    }
+
+    public void setItemTypes(ItemTypes itemTypes) {
+        this.itemTypes = itemTypes;
+    }
+
+    public double getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(double quantity) {
+        this.quantity = quantity;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public Date getCreated_date() {
+        return created_date;
+    }
+
+    public void setCreated_date(Date created_date) {
+        this.created_date = created_date;
+    }
+
+    public boolean isSelected() {
+        return selected;
+    }
+
+    public void setSelected(boolean selected) {
+        this.selected = selected;
+    }
+
+    public Cart getCart() {
+        return cart;
+    }
+
+    public void setCart(Cart cart) {
+        this.cart = cart;
+    }
 }

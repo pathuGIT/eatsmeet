@@ -16,6 +16,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/food")
@@ -55,6 +56,11 @@ public class FoodCurryController {
         }
     }
 
-
+//    @GetMapping("/all")
+//    public ResponseEntity<?> getAllFoodCurryByDate(@RequestBody Map<String, String> request){
+//        String date = request.get("date");
+//        List<FoodsCurry> response = foodCurryService.getFoodsCurryForDate(date);
+//        return ResponseEntity.ok(new ApiResponse<List<FoodsCurry>>("Foods fetched successfully", response));
+//    }
 
 }

@@ -44,7 +44,7 @@ public class AuthController {
                     .map(ObjectError::getDefaultMessage)
                     .toList();
 
-            return ResponseEntity.badRequest().body(errors);
+            return ResponseEntity.badRequest().body(new ApiResponse<List<String>>("Empty fields..", errors));
         }
 
         try {
@@ -68,6 +68,7 @@ public class AuthController {
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@Valid @RequestBody LoginRequest loginRequest){
+        System.out.println("un: "+ loginRequest.getLogin());
         try {
             TokenResponse response = authService.verifyUser(loginRequest);
             return ResponseEntity.ok(new ApiResponse<TokenResponse>("User Login Successfull.", response ));
@@ -132,9 +133,9 @@ public class AuthController {
         }
     }
 
-    @PostMapping("/user/activate/token/{token}")
-    public ResponseEntity<?> activeUsers(@PathVariable String token){
-        //Users users = authService.activeUsers(token);
-        return null;
-    }
+//    @PostMapping("/user/activate/token/{token}")
+//    public ResponseEntity<?> activeUsers(@PathVariable String token){
+//        //Users users = authService.activeUsers(token);
+//        return null;
+//    }
 }
