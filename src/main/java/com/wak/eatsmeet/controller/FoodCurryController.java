@@ -58,8 +58,7 @@ public class FoodCurryController {
     }
 
     @GetMapping("/foodCurry/all")
-    public ResponseEntity<?> getAllFoodCurryByDate(@RequestBody Map<String, String> req){
-        String date = req.get("date");
+    public ResponseEntity<?> getAllFoodCurryByDate(@RequestParam String date){
         LocalDate parsedDate = LocalDate.parse(date);
         List<FoodsCurry> res =  foodCurryService.getAllFoodCurryByDate(parsedDate);
         return ResponseEntity.ok(new ApiResponse<List<FoodsCurry>>("success", res));
