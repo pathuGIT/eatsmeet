@@ -1,0 +1,1394 @@
+{
+	"info": {
+		"_postman_id": "c1ed03bc-99bf-47f0-a8f9-6a6dccc5044f",
+		"name": "eatsmeet",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "33857072",
+		"_collection_link": "https://galactic-moon-315292.postman.co/workspace/My-Workspace~eaa54b7c-323a-4df6-8a4a-ef8ccef88d2f/collection/33857072-c1ed03bc-99bf-47f0-a8f9-6a6dccc5044f?action=share&source=collection_link&creator=33857072"
+	},
+	"item": [
+		{
+			"name": "auth",
+			"item": [
+				{
+					"name": "register user",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"\",\r\n    \"email\": \"\",\r\n    \"contact\": \"\",\r\n    \"nic\": \"\",\r\n    \"password\": \"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/auth/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "send validate-link to users",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiQURNSU4iLCJzdWIiOiJuYWR1bkBnbWFpbC5jb20iLCJpYXQiOjE3NTY3NTE4MTAsImV4cCI6MTc1Njc1MTkzMH0.wNaupsu-TrqEvMimPcOMAzU6yo5qo2DZTAx3W0vn8MI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/mail/validate-link?email=pathumwannige@gmail.com",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"mail",
+								"validate-link"
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "pathumwannige@gmail.com"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"login\": \"0771234567\",\r\n    \"password\": \"securePassword123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "refresh",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"refreshToken\": \"eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiQURNSU4iLCJzdWIiOiJuYWR1bkBnbWFpbC5jb20iLCJpYXQiOjE3NTk2NzE5NjYsImV4cCI6MTc1OTY4OTk2Nn0.dZxfAEBmfLFgmEkjJ4cMwl3DcX1VJFoksnMIhpbat_w\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/auth/refresh-token",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"auth",
+								"refresh-token"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "logout",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiVVNFUiIsInN1YiI6ImthQGdtYWlsLmNvbSIsImlhdCI6MTc2MDk2OTYzNywiZXhwIjoxNzYwOTY5NzU3fQ.1QgmVyjQb3qTC4N71HFVNOP72-tUvZOEeGagG3hbHx0",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/auth/logout",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"auth",
+								"logout"
+							],
+							"query": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiVVNFUiIsInN1YiI6InBhdGh1bXdhbm5pZ2VAZ21haWwuY29tIiwiaWF0IjoxNzU2NTI3NjI0LCJleHAiOjE3NTY1Mjc3NDR9.ntnk3Fu6M-msYCb3kVmJlNkxL9uricKUBiPMQGxijuk",
+									"disabled": true
+								},
+								{
+									"key": "role",
+									"value": "USER",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "send link for sub admin register",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiQURNSU4iLCJzdWIiOiJuYWR1bkBnbWFpbC5jb20iLCJpYXQiOjE3NTY3NTg0MzUsImV4cCI6MTc1Njc1ODU1NX0.rvMyO_vda9ASIm0aZQUzP8v9U7W-J2IIAiR85nla54s",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/mail/credentials?email=wannigelakshan@gmail.com",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"mail",
+								"credentials"
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "wannigelakshan@gmail.com"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "register sub admin with password",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"password\":\"ghdb\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/auth/emp/register?token=eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiRU1QTE9ZRUUiLCJzdWIiOiJ3YW5uaWdlbGFrc2hhbkBnbWFpbC5jb20iLCJpYXQiOjE3NTY3NTg0OTMsImV4cCI6MTc1Njg0NDg5M30.ibnwIsi5ciYtjRz-IiL4SFYNiPJ9kWO6s2e2eiHhEho",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"auth",
+								"emp",
+								"register"
+							],
+							"query": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiRU1QTE9ZRUUiLCJzdWIiOiJ3YW5uaWdlbGFrc2hhbkBnbWFpbC5jb20iLCJpYXQiOjE3NTY3NTg0OTMsImV4cCI6MTc1Njg0NDg5M30.ibnwIsi5ciYtjRz-IiL4SFYNiPJ9kWO6s2e2eiHhEho"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "emp",
+			"item": [
+				{
+					"name": "new emp",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiQURNSU4iLCJzdWIiOiJuYWR1bkBnbWFpbC5jb20iLCJpYXQiOjE3NTY1ODAyNzAsImV4cCI6MTc1NjU4MDM5MH0.tsElaTOHZwRvWYx_f7GqfEgwU8IimiF-A1mOvuBcBRc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"nayan\",\r\n  \"email\": \"nayan@gmail.com\",\r\n  \"contact\": \"0771234000\",\r\n  \"address\": \"Colombo, Sri Lanka\",\r\n  \"dob\": \"1998-05-12\",\r\n  \"nic\": \"982345672V\",\r\n  \"password\": \"securePassword123\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/emp",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"emp"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all emps",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiQURNSU4iLCJzdWIiOiJuYWR1bkBnbWFpbC5jb20iLCJpYXQiOjE3NTY1MzY2NzgsImV4cCI6MTc1NjUzNjc5OH0.jgrD7eIiChFuJgqcvX-zZDCs1u9Y-AVgVpJLyYSsHC4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Kamal\",\r\n  \"email\": \"k@gmail.com\",\r\n  \"contact\": \"0771234564\",\r\n  \"address\": \"Colombo, Sri Lanka\",\r\n  \"dob\": \"1998-05-12\",\r\n  \"nic\": \"982345671V\",\r\n  \"password\": \"securePassword123\"\r\n}\r\n"
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/emp",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"emp"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get emp by name",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiQURNSU4iLCJzdWIiOiJuYWR1bkBnbWFpbC5jb20iLCJpYXQiOjE3NTY1ODAyNzAsImV4cCI6MTc1NjU4MDM5MH0.tsElaTOHZwRvWYx_f7GqfEgwU8IimiF-A1mOvuBcBRc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/emp/search?name=a",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"emp",
+								"search"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "a"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "emp by id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiQURNSU4iLCJzdWIiOiJuYWR1bkBnbWFpbC5jb20iLCJpYXQiOjE3NTY1Njk4OTIsImV4cCI6MTc1NjU3MDAxMn0.R4um-iEr8NSE9MfEtpmdvz6rkoyJH9BOGPCZr3_WUek",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/emp/search/4",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"emp",
+								"search",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete emp by id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiQURNSU4iLCJzdWIiOiJuYWR1bkBnbWFpbC5jb20iLCJpYXQiOjE3NTY1ODA0MTUsImV4cCI6MTc1NjU4MDUzNX0.D_H9BZfVoNJlgnIMCeqrc3pXdfhvqf8Jk0vgpiWOa94",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/emp/delete/5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"emp",
+								"delete",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update emp",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiQURNSU4iLCJzdWIiOiJuYWR1bkBnbWFpbC5jb20iLCJpYXQiOjE3NTY3NTgzNDcsImV4cCI6MTc1Njc1ODQ2N30.ImiuN14M4_S6oMVXr2eAPhSNZ1-9dM1RWQgwIkObNNU",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n            \"name\": \"Kamal Gunasena\",\r\n            \"email\": \"wannigelakshan@gmail.com\",\r\n            \"contact\": \"0771234564\",\r\n            \"address\": \"Colombo, Sri Lanka\",\r\n            \"bod\": null,\r\n            \"nic\": \"982345671V\",\r\n            \"active\": true,\r\n            \"img_url\": \"//\"\r\n        }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/emp/update/4",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"emp",
+								"update",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update emp role",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiQURNSU4iLCJzdWIiOiJuYWR1bkBnbWFpbC5jb20iLCJpYXQiOjE3NTY3NTgzNDcsImV4cCI6MTc1Njc1ODQ2N30.ImiuN14M4_S6oMVXr2eAPhSNZ1-9dM1RWQgwIkObNNU",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"role\":\"SUB_ADMIN\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/emp/role/4",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"emp",
+								"role",
+								"4"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "foods",
+			"item": [
+				{
+					"name": "curry",
+					"item": [
+						{
+							"name": "add curry",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiQURNSU4iLCJzdWIiOiJuYWR1bkBnbWFpbC5jb20iLCJpYXQiOjE3NTcwMTAyODYsImV4cCI6MTc1NzAxMDQwNn0.oyVaTJjnxBSnecgaqUhFPdDI8okt-6FqZ0Y2yPirslU",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Parippu\",\r\n    \"price\": 60.00,\r\n    \"details\": \"Chicken tests\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/curry/add",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"curry",
+										"add"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get all",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/api/curry/all",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"curry",
+										"all"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "search By Id",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiQURNSU4iLCJzdWIiOiJuYWR1bkBnbWFpbC5jb20iLCJpYXQiOjE3NTcwMDcyMzEsImV4cCI6MTc1NzAwNzM1MX0.2AZkuZA2UM3GrKEvq1YXk-iSSwjVWZGBERbuOlCazGM",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/api/curry/searchId/5",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"curry",
+										"searchId",
+										"5"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "search By name",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/api/curry/searchName/a",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"curry",
+										"searchName",
+										"a"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update curry",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiQURNSU4iLCJzdWIiOiJuYWR1bkBnbWFpbC5jb20iLCJpYXQiOjE3NTcwMDkzNTEsImV4cCI6MTc1NzAwOTQ3MX0.mDV4VSjyp1WSQG3HYlSRftH30Fm0SrgEOC1_P5SKFOY",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Masala@\",\r\n    \"price\": 50.00,\r\n    \"details\": \"Best tests\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/curry/update/5",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"curry",
+										"update",
+										"5"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "delete curry by id",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiQURNSU4iLCJzdWIiOiJuYWR1bkBnbWFpbC5jb20iLCJpYXQiOjE3NTcwMDk4MjEsImV4cCI6MTc1NzAwOTk0MX0.Qx4WAsefJnnEhPqDl9FnONxQNt4-U238r9zm_4NbKfo",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/api/curry/deleteId/5",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"curry",
+										"deleteId",
+										"5"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "range price",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/api/curry/searchPrice?min=60&max=70",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"curry",
+										"searchPrice"
+									],
+									"query": [
+										{
+											"key": "min",
+											"value": "60"
+										},
+										{
+											"key": "max",
+											"value": "70"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "food",
+					"item": [
+						{
+							"name": "add",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiQURNSU4iLCJzdWIiOiJuYWR1bkBnbWFpbC5jb20iLCJpYXQiOjE3NTk2NzE5OTgsImV4cCI6MTc1OTY3MjExOH0.mBWnAxUrstb2ySaOw63oaMolzTapNc_DBCR-lFbZEQQ",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\":\"Egg Rice\",\r\n    \"price\":850.00,\r\n    \"details\":\"Egg & Vegitable Mix\",\r\n    \"img_url\":\"\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/food/add",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"food",
+										"add"
+									],
+									"query": [
+										{
+											"key": "min",
+											"value": "60",
+											"disabled": true
+										},
+										{
+											"key": "max",
+											"value": "70",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "all",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/api/food/all",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"food",
+										"all"
+									],
+									"query": [
+										{
+											"key": "min",
+											"value": "60",
+											"disabled": true
+										},
+										{
+											"key": "max",
+											"value": "70",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get by id",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiQURNSU4iLCJzdWIiOiJuYWR1bkBnbWFpbC5jb20iLCJpYXQiOjE3NTc3NjA1MDksImV4cCI6MTc1Nzc2MDYyOX0.z32oV1Crkl40ObHr1bJQqtn9k4FLVWQw1pKhTzgpUIo",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\":\"Biriyani\",\r\n    \"price\":850.00,\r\n    \"details\":\"Chicken mix\",\r\n    \"img_url\":\"\"\r\n}"
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/food/searchBy/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"food",
+										"searchBy",
+										"1"
+									],
+									"query": [
+										{
+											"key": "min",
+											"value": "60",
+											"disabled": true
+										},
+										{
+											"key": "max",
+											"value": "70",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update food",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiQURNSU4iLCJzdWIiOiJuYWR1bkBnbWFpbC5jb20iLCJpYXQiOjE3NTcxODE3NjIsImV4cCI6MTc1NzE4MTg4Mn0.MVde3-GN-tLa61iB6SPE5KrC1cTe2jGigs3-sIKKOyc",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\":\"Fride Rice\",\r\n    \"price\":700.00,\r\n    \"details\":\"Chicken mix\",\r\n    \"img_url\":\"\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/food/update/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"food",
+										"update",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "delete",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiQURNSU4iLCJzdWIiOiJuYWR1bkBnbWFpbC5jb20iLCJpYXQiOjE3NTcxODI0MjAsImV4cCI6MTc1NzE4MjU0MH0.-L4oSa9Iar7iCGkLtXjDdGxs3gTRjjzSpc4Qkt6Mk3k",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"refreshToken\": \"eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiQURNSU4iLCJzdWIiOiJuYWR1bkBnbWFpbC5jb20iLCJpYXQiOjE3NTcxODAyOTMsImV4cCI6MTc1NzE5ODI5M30.1gOaft_K-oOKnBbUIxRgSIE1ghw_yk-PGl64vkV4-WI\"\r\n}"
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/food/deleteBy/3",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"food",
+										"deleteBy",
+										"3"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get by name",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/api/food/searchByName/b",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"food",
+										"searchByName",
+										"b"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "filter by prce",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/food/searchByPrice",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"food",
+										"searchByPrice"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "foodsCurry",
+					"item": [
+						{
+							"name": "Add foods to curry",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiQURNSU4iLCJzdWIiOiJuYWR1bkBnbWFpbC5jb20iLCJpYXQiOjE3NTc3NzU0NDgsImV4cCI6MTc1Nzc3NTU2OH0.WobPNjHUOqepWjsvjkrbVTaBG4yO_fKYkxEoNcqdHQw",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"foodId\": [1, 2],\r\n  \"date\": \"2025-09-13\",\r\n  \"times\": \"BREAK_FAST\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/curry/6/add-food",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"curry",
+										"6",
+										"add-food"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get foods for curry id",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiQURNSU4iLCJzdWIiOiJuYWR1bkBnbWFpbC5jb20iLCJpYXQiOjE3NTgwNTc1MzcsImV4cCI6MTc1ODA1NzY1N30.tLVA-vxEShnVx3xbpHL_MhDbrQjsr07Xdd5pzWZUdaY",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/api/curry/6/foods",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"curry",
+										"6",
+										"foods"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "remove food from curry",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiQURNSU4iLCJzdWIiOiJuYWR1bkBnbWFpbC5jb20iLCJpYXQiOjE3NTc3ODcyOTMsImV4cCI6MTc1Nzc4NzQxM30.KnCRdN7gVwSXvkBcpF19NXOicUv6qPpU-AmaEi_TCh8",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"refreshToken\": \"eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiQURNSU4iLCJzdWIiOiJuYWR1bkBnbWFpbC5jb20iLCJpYXQiOjE3NTcxODAyOTMsImV4cCI6MTc1NzE5ODI5M30.1gOaft_K-oOKnBbUIxRgSIE1ghw_yk-PGl64vkV4-WI\"\r\n}"
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/curry/remove-food-curry/8",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"curry",
+										"remove-food-curry",
+										"8"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "getAllFoodsForDate",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/api/food/foodCurry/all?date=2025-10-25",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"food",
+										"foodCurry",
+										"all"
+									],
+									"query": [
+										{
+											"key": "date",
+											"value": "2025-10-25"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "curryFoods",
+					"item": [
+						{
+							"name": "add curry to food",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiQURNSU4iLCJzdWIiOiJuYWR1bkBnbWFpbC5jb20iLCJpYXQiOjE3NTgwNTczNTMsImV4cCI6MTc1ODA1NzQ3M30.G8TJ1m748B0295N8S7xSa5Wa1pn4X04-F42cKmd9onY",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"curryId\": [6, 7],\r\n  \"date\": \"2025-09-17\",\r\n  \"times\": \"BREAK_FAST\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/food/1/add-curry",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"food",
+										"1",
+										"add-curry"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get curries for food id",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiQURNSU4iLCJzdWIiOiJuYWR1bkBnbWFpbC5jb20iLCJpYXQiOjE3NTgwNjAwNDcsImV4cCI6MTc1ODA2MDE2N30.n2F3vR080_vtCQGcZ62peMej2HowwUCSayzmEL_NMWg",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/api/food/1/date/2025-09-17/time/BREAK_FAST",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"food",
+										"1",
+										"date",
+										"2025-09-17",
+										"time",
+										"BREAK_FAST"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "user",
+			"item": [
+				{
+					"name": "profile",
+					"item": []
+				},
+				{
+					"name": "update user by admin",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiQURNSU4iLCJzdWIiOiJuYWR1bkBnbWFpbC5jb20iLCJpYXQiOjE3NTgxMDU2NjQsImV4cCI6MTc1ODEwNTc4NH0.M7rACTsZlFQanhL9Nx1JDx4fGETd90RdyPiAKYmbIF8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Janith Usantha\",\r\n  \"nic\": \"200104001291V\",\r\n  \"contact\": \"0745620001\",\r\n  \"img_url\": \"https://example.com/images/johndoe.jpg\",\r\n  \"email\": \"wannigelakshan@gmail.com\",\r\n  \"active\": true\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/user/update/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"user",
+								"update",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "New Request",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "New Request",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "profile",
+			"item": [
+				{
+					"name": "me",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiQURNSU4iLCJzdWIiOiJuYWR1bkBnbWFpbC5jb20iLCJpYXQiOjE3NTk1NTU1MjAsImV4cCI6MTc1OTU1NTY0MH0.KDQzbNni1CvoMFeWy1wNK_LNvOE8mU5p4yygg72q5KI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/profile/me",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"profile",
+								"me"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "cart",
+			"item": [
+				{
+					"name": "New Request",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
