@@ -8,6 +8,8 @@ import com.wak.eatsmeet.model.user.Roles;
 import com.wak.eatsmeet.model.user.Users;
 import com.wak.eatsmeet.repository.user.EmployeeRepo;
 import com.wak.eatsmeet.repository.user.UserRepo;
+import com.wak.eatsmeet.model.cart.Cart;
+import com.wak.eatsmeet.repository.cart.CartRepo;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -30,6 +32,9 @@ public class AuthService {
     private EmployeeRepo employeeRepo;
 
     @Autowired
+    private CartRepo cartRepo;
+
+    @Autowired
     private AuthenticationManager authenticationManager;
 
     @Autowired
@@ -38,28 +43,33 @@ public class AuthService {
     private final BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder(12);
 
     public UserRegisterResponse userRegister(Users users) {
-        if(userRepo.existsByEmail(users.getEmail())){
+        if (userRepo.existsByEmail(users.getEmail())) {
             throw new IllegalArgumentException("This Email already exists.");
         }
-        if(userRepo.existsByContact(users.getContact())){
+        if (userRepo.existsByContact(users.getContact())) {
             throw new IllegalArgumentException("This Email already exists.");
         }
-        if(userRepo.existsByNic(users.getNic())){
+        if (userRepo.existsByNic(users.getNic())) {
             throw new IllegalArgumentException("This NIC number already exists.");
         }
         users.setPassword(bCryptPasswordEncoder.encode(users.getPassword()));
 
         Users res = userRepo.save(users);
-        UserRegisterResponse ur = new UserRegisterResponse(res.getId(), res.getName(), res.getEmail(), res.getContact());
+
+        Cart cart = new Cart();
+        cart.setUsers(res);
+        cartRepo.save(cart);
+
+        UserRegisterResponse ur = new UserRegisterResponse(res.getId(), res.getName(), res.getEmail(),
+                res.getContact());
         return ur;
     }
 
     public TokenResponse verifyUser(LoginRequest loginRequest) {
         Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(loginRequest.getLogin(), loginRequest.getPassword())
-        );
+                new UsernamePasswordAuthenticationToken(loginRequest.getLogin(), loginRequest.getPassword()));
 
-        if(!authentication.isAuthenticated()){
+        if (!authentication.isAuthenticated()) {
             throw new RuntimeException("Invalid credentials");
         }
 
@@ -68,13 +78,13 @@ public class AuthService {
 
         String activeToken = jwtService.generateActiveToken(userDetails.getUsername(), role);
         String refreshToken = jwtService.generateRefreshToken(userDetails.getUsername(), role);
-        if(refreshToken != null){
-            if(role.equals("USER")) {
+        if (refreshToken != null) {
+            if (role.equals("USER")) {
                 Users users = userRepo.findByEmail(userDetails.getUsername());
                 users.setRefresh_token(refreshToken);
                 userRepo.save(users);
 
-            } else if(role.equals("EMPLOYEE") || role.equals("ADMIN") || role.equals("SUB_ADMIN")){
+            } else if (role.equals("EMPLOYEE") || role.equals("ADMIN") || role.equals("SUB_ADMIN")) {
                 Employees emp = employeeRepo.findByEmail(userDetails.getUsername());
                 emp.setRefresh_token(refreshToken);
                 employeeRepo.save(emp);
@@ -91,7 +101,7 @@ public class AuthService {
             String role = jwtService.extractRole(refreshToken);
 
             UserDetails userDetails = User.withUsername(userLogin).password("").roles(role).build();
-            if(jwtService.validateToken(refreshToken, userDetails)){
+            if (jwtService.validateToken(refreshToken, userDetails)) {
                 String newActiveToken = jwtService.generateActiveToken(userLogin, role);
                 return Map.of("activeToken", newActiveToken);
             }
@@ -103,21 +113,21 @@ public class AuthService {
 
     public Map<String, String> logout(String username, String role) {
 
-        if(role.equals("USER")){
+        if (role.equals("USER")) {
             Users user = userRepo.findByEmail(username);
 
             if (user != null) {
                 user.setRefresh_token(null);
                 userRepo.save(user);
-                return Map.of("msg", "User "+ username + " successfully logout.");
+                return Map.of("msg", "User " + username + " successfully logout.");
             }
-        }else{
+        } else {
             Employees emp = employeeRepo.findByEmail(username);
 
             if (emp != null) {
                 emp.setRefresh_token(null);
                 employeeRepo.save(emp);
-                return Map.of("msg", "Emp "+ username + " successfully logout.");
+                return Map.of("msg", "Emp " + username + " successfully logout.");
             }
         }
 
@@ -125,14 +135,14 @@ public class AuthService {
     }
 
     public String subAdminRegister(String token, String password) {
-        if(jwtService.validateRegisterToken(token)){
+        if (jwtService.validateRegisterToken(token)) {
             String email = jwtService.extractUserName(token);
 
             Employees emp = employeeRepo.findByEmail(email);
-            if(emp == null){
+            if (emp == null) {
                 throw new RuntimeException("This Emp is not valid.");
             }
-            if(emp.getRole() != Roles.SUB_ADMIN){
+            if (emp.getRole() != Roles.SUB_ADMIN) {
                 throw new RuntimeException("This Emp is not Sub Admin.");
             }
 
@@ -145,9 +155,9 @@ public class AuthService {
         return "Token is not valid..";
     }
 
-//    public Users activeUsers(String token) {
-//        if(jwtService.validateRegisterToken(token)){
-//
-//        }
-//    }
+    // public Users activeUsers(String token) {
+    // if(jwtService.validateRegisterToken(token)){
+    //
+    // }
+    // }
 }
