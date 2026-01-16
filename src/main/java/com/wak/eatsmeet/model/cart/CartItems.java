@@ -12,7 +12,7 @@ public class CartItems {
     @Column(name = "cart_item_id")
     private int id;
 
-    private int item_id;
+    private int itemId;
 
     @Column(nullable = true)
     private int curry_id;
@@ -29,9 +29,9 @@ public class CartItems {
     @JoinColumn(name = "cart_id", referencedColumnName = "cart_id")
     private Cart cart;
 
-    public CartItems(int id, int item_id, ItemTypes itemTypes, double quantity, double price, Date created_date, boolean selected, Cart cart, int curry_id) {
+    public CartItems(int id, int itemId, ItemTypes itemTypes, double quantity, double price, Date created_date, boolean selected, Cart cart, int curry_id) {
         this.id = id;
-        this.item_id = item_id;
+        this.itemId = itemId;
         this.itemTypes = itemTypes;
         this.quantity = quantity;
         this.price = price;
@@ -53,11 +53,11 @@ public class CartItems {
     }
 
     public int getItem_id() {
-        return item_id;
+        return itemId;
     }
 
     public void setItem_id(int item_id) {
-        this.item_id = item_id;
+        this.itemId = item_id;
     }
 
     public ItemTypes getItemTypes() {
