@@ -21,18 +21,18 @@ public class Curry {
     @NotBlank(message = "Details is required")
     private String details;
 
-    private String img_url;
+    private String imageUrl;
 
     @OneToMany(mappedBy = "curry", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnore
     private Set<FoodsCurry> foodsCurries = new HashSet<>();
 
-    public Curry(int id, String name, double price, String details, String img_url, Set<FoodsCurry> foodsCurries) {
+    public Curry(int id, String name, double price, String details, String imageUrl, Set<FoodsCurry> foodsCurries) {
         this.id = id;
         this.name = name;
         this.price = price;
         this.details = details;
-        this.img_url = img_url;
+        this.imageUrl = imageUrl;
         this.foodsCurries = foodsCurries;
     }
 
@@ -72,11 +72,11 @@ public class Curry {
     }
 
     public String getImg_url() {
-        return img_url;
+        return imageUrl;
     }
 
     public void setImg_url(String img_url) {
-        this.img_url = img_url;
+        this.imageUrl = img_url;
     }
 
     public Set<FoodsCurry> getFoodsCurries() {
